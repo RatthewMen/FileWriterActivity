@@ -1,7 +1,0 @@
-FileWriter: 4 miliseconds. 
-BufferedWriter: 6 miliseconds. 
-FileOutputStream: 5 miliseconds. 
-BufferedOutputStream: 3 miliseconds. 
-Files: 15 miliseconds. 
-
-Times: 4 6 5 3 15 
