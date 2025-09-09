@@ -111,4 +111,13 @@ public class MyFileWriter {
     public static void printFileSizebutPublic(String fileName){
         printFileSize(fileName);
     }
+
+    public static String toString(String fileName){
+        File f = new File(fileName);
+        //f.getPath();
+        f.length();
+        System.out.println(f.toString());
+        return f.toString();
+   
+    }
 }

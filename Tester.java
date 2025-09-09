@@ -3,6 +3,7 @@ public class Tester {
         //MyFileWriter.makeSecretFile(".theStrings.txt", "deez nuts");
         //MyFileWriter.fileinSecretFolder("homework.txt", ".hiddenStrings");
 
-        MyFileWriter.printFileSize("boar.txt");
+        MyFileWriter.printFileSizebutPublic("boar.txt");
+        MyFileWriter.toString("boar.txt");
     }
 }
