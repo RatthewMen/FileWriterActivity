@@ -99,4 +99,16 @@ public class MyFileWriter {
             e.printStackTrace();
         }
     }
+
+    private static void printFileSize(String fileName) {
+        File f = new File(fileName);
+        //f.getPath();
+        f.length();
+        System.out.println(f.length());
+
+    }
+
+    public static void printFileSizebutPublic(String fileName){
+        printFileSize(fileName);
+    }
 }
