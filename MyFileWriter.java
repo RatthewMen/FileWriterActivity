@@ -100,11 +100,15 @@ public class MyFileWriter {
         }
     }
 
-    public static void printFileSize(String fileName) {
+    private static void printFileSize(String fileName) {
         File f = new File(fileName);
         //f.getPath();
         f.length();
         System.out.println(f.length());
 
+    }
+
+    public static void printFileSizebutPublic(String fileName){
+        printFileSize(fileName);
     }
 }
