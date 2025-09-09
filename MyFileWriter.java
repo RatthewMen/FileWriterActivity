@@ -82,6 +82,7 @@ public class MyFileWriter {
         }
     }
 
+    //makes a secret file
     public static void makeSecretFile(String fileName, String password) {
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileName))) {
             bos.write(password.getBytes());
@@ -90,6 +91,7 @@ public class MyFileWriter {
         }
     }
 
+    //makes the file in the secret folder
     public static void fileinSecretFolder(String fileName, String path){
         Path dir = Path.of(path);
         File targetFile = dir.resolve(fileName).toFile();
@@ -100,6 +102,7 @@ public class MyFileWriter {
         }
     }
 
+    //prints out the file size
     private static void printFileSize(String fileName) {
         File f = new File(fileName);
         //f.getPath();
@@ -108,10 +111,13 @@ public class MyFileWriter {
 
     }
 
+    //tester method for public file size
     public static void printFileSizebutPublic(String fileName){
         printFileSize(fileName);
     }
+    
 
+    //prints out the filename
     public static String toString(String fileName){
         File f = new File(fileName);
         //f.getPath();
