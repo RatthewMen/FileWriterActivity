@@ -25,7 +25,7 @@ public class MyFileWriter {
         }
         endTime = System.currentTimeMillis();
         TimesString = "FileWriter: " + (endTime - startTime) + " miliseconds. \n";
-        SheetsString = SheetsString + (endTime - startTime)+ " ";
+        SheetsString = SheetsString + (endTime - startTime) + " ";
 
         // 2. Using BufferedWriter
         startTime = System.currentTimeMillis();
@@ -36,7 +36,7 @@ public class MyFileWriter {
         }
         endTime = System.currentTimeMillis();
         TimesString = TimesString + "BufferedWriter: " + (endTime - startTime) + " miliseconds. \n";
-        SheetsString = SheetsString + (endTime - startTime)+ " ";
+        SheetsString = SheetsString + (endTime - startTime) + " ";
 
 
         // 3. Using FileOutputStream
@@ -47,20 +47,23 @@ public class MyFileWriter {
             e.printStackTrace();
         }
         endTime = System.currentTimeMillis();
-        TimesString = TimesString + "FileOutputStream: " + (endTime - startTime) + " miliseconds. \n";
-        SheetsString = SheetsString + (endTime - startTime)+ " ";
+        TimesString =
+                TimesString + "FileOutputStream: " + (endTime - startTime) + " miliseconds. \n";
+        SheetsString = SheetsString + (endTime - startTime) + " ";
 
 
         // 4. Using BufferedOutputStream
         startTime = System.currentTimeMillis();
-        try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(fileName4))) {
+        try (BufferedOutputStream bufferedOutputStream =
+                new BufferedOutputStream(new FileOutputStream(fileName4))) {
             bufferedOutputStream.write(data.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
         endTime = System.currentTimeMillis();
-        TimesString = TimesString + "BufferedOutputStream: " + (endTime - startTime) + " miliseconds. \n";
-        SheetsString = SheetsString + (endTime - startTime)+ " ";
+        TimesString =
+                TimesString + "BufferedOutputStream: " + (endTime - startTime) + " miliseconds. \n";
+        SheetsString = SheetsString + (endTime - startTime) + " ";
 
         // 5. Using Files (java.nio.file)
         startTime = System.currentTimeMillis();
@@ -74,15 +77,18 @@ public class MyFileWriter {
         SheetsString = SheetsString + (endTime - startTime) + " ";
 
         TimesString = TimesString + "\n" + SheetsString;
-        //6. Printing the times at the end (using filewriter cus idk)
+        // 6. Printing the times at the end (using filewriter cus idk)
         try (FileWriter writer = new FileWriter(TimesFile)) {
             writer.write(TimesString);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
-    //makes a secret file
+        printFileSize(fileName1, fileName2, fileName3, fileName4, fileName5);
+    }
+    // END OF MAIN
+
+    // makes a secret file
     public static void makeSecretFile(String fileName, String password) {
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileName))) {
             bos.write(password.getBytes());
@@ -91,39 +97,43 @@ public class MyFileWriter {
         }
     }
 
-    //makes the file in the secret folder
-    public static void fileinSecretFolder(String fileName, String path){
+    // makes the file in the secret folder
+    public static void fileinSecretFolder(String fileName, String path) {
         Path dir = Path.of(path);
         File targetFile = dir.resolve(fileName).toFile();
-        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(targetFile))) {
+        try (BufferedOutputStream bos =
+                new BufferedOutputStream(new FileOutputStream(targetFile))) {
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    //prints out the file size
-    private static void printFileSize(String fileName) {
-        File f = new File(fileName);
-        //f.getPath();
-        f.length();
-        System.out.println(f.length());
-
+    // prints out the file size
+    private static void printFileSize(String... fileNames) {
+        long totalSize = 0;
+        for (String fileName : fileNames) {
+            File file = new File(fileName);
+            if (file.exists()) {
+                totalSize += file.length();
+            }
+        }
+        System.out.println("Total size of all files: " + totalSize + " bytes");
     }
 
-    //tester method for public file size
-    public static void printFileSizebutPublic(String fileName){
+    // tester method for public file size
+    public static void printFileSizebutPublic(String fileName) {
         printFileSize(fileName);
     }
-    
 
-    //prints out the filename
-    public static String toString(String fileName){
+
+    // prints out the filename
+    public static String toString(String fileName) {
         File f = new File(fileName);
-        //f.getPath();
+        // f.getPath();
         f.length();
         System.out.println(f.toString());
         return f.toString();
-   
+
     }
 }
