@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.security.MessageDigest;
 
 public class MyFileWriter {
     public static void main(String[] args) {
@@ -81,6 +82,7 @@ public class MyFileWriter {
             e.printStackTrace();
         }
     }
+    // methods 
 
     //makes a secret file
     public static void makeSecretFile(String fileName, String password) {
@@ -125,5 +127,29 @@ public class MyFileWriter {
         System.out.println(f.toString());
         return f.toString();
    
+    }
+
+    //Hashes with the SHA-256 algorithim
+    public static String hashFile(String filePath){
+        try{
+            byte[] Bytes = Files.readAllBytes(Paths.get(filePath));
+
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(Bytes);
+
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                hexString.append(String.format("%02x", b));
+            }
+            System.out.println("The hash for " + Files.readString(Paths.get(filePath)) + " is: " + hexString.toString());
+
+            return hexString.toString();
+            
+        } catch (Exception e){
+            System.out.println("SHA-256 didnt work from the file: " + filePath);
+            return null;
+        }
+
+
     }
 }
