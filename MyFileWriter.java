@@ -141,15 +141,55 @@ public class MyFileWriter {
             for (byte b : hashBytes) {
                 hexString.append(String.format("%02x", b));
             }
-            System.out.println("The hash for " + Files.readString(Paths.get(filePath)) + " is: " + hexString.toString());
+            //System.out.println("The hash for " + Files.readString(Paths.get(filePath)) + " is: " + hexString.toString());
 
             return hexString.toString();
-            
+
+        } catch (java.nio.file.NoSuchFileException e) {
+            System.err.println("File not found: " + filePath);
+            return null;
+    
+        } catch (IOException e) {
+            System.err.println("I/O error while reading file: " + filePath);
+            return null;
+        
         } catch (Exception e){
-            System.out.println("SHA-256 didnt work from the file: " + filePath);
+            System.out.println("DUMB ERROR FOR File : " + filePath);
             return null;
         }
-
-
     }
+    
+    //compares 2 strings or hashes to see if they are equal
+    public static String compareHash(String hash1, String hash2){
+        if (hash1.equals(hash2)){
+            return "Hashes are equal";
+        }
+        return "NOT EQUAL WRONG BOZO";
+    }
+
+    //test empty files. Apparently empty files have a hash
+    public static void testHashFileEmptyFiles(String emptyHash){
+        System.out.println(compareHash(emptyHash, hashFile("emptyfile.txt")));
+    }
+
+    //tests large files and takes a second to work
+    public static void testHashFileLargeFiles(String bigFile){
+        System.out.println(compareHash(bigFile, hashFile("largetext.txt")));
+    }
+
+    //works with unicode
+    public static void testHashFileSpecialChars(String specialChars){
+        System.out.println(compareHash(specialChars, hashFile("FunnyCharacters.txt")));
+    }
+
+    //throws the file not found exception
+    public static void testHashFileNonExistent(String idkbruh){
+        System.out.println(compareHash(idkbruh, hashFile("realfile.txt")));
+    }
+
+
+
+    //public static void 
+
+
 }
